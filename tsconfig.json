@@ -9,10 +9,9 @@
     }
   ],
   "compilerOptions": {
-    "esModuleInterop": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["*"]
     }
   }
 }
