@@ -1,6 +1,6 @@
 import AppLayout from "@/layout";
 import HomePage from "@/pages";
-import { LoginPage } from "@/pages/Auth/LoginPage";
+import LoginPage from "@/pages/Auth/LoginPage";
 import ProductsPage from "@/pages/ProductsPage";
 import ProductDetails from "@/pages/ProductDetails";
 import {
@@ -9,11 +9,11 @@ import {
   Route,
 } from "react-router-dom";
 import PersistLogin from "@/components/auth/PersistLogin";
-import { AboutPage } from "@/pages/AboutPage";
+import AboutPage from "@/pages/AboutPage";
 import CartPage from "@/pages/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import PricingPage from "@/pages/PricingPage";
-import { SignupPage } from "@/pages/Auth/SignUpPage";
+import SignupPage from "@/pages/Auth/SignUpPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
