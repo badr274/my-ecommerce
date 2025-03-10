@@ -13,7 +13,7 @@ import { AboutPage } from "@/pages/AboutPage";
 import CartPage from "@/pages/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import PricingPage from "@/pages/PricingPage";
-
+import { SignupPage } from "@/pages/Auth/SignUpPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -27,6 +27,7 @@ const router = createBrowserRouter(
         <Route path="/pricing" element={<PricingPage />} />
         <Route element={<PersistLogin />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignupPage />} />
         </Route>
       </Route>
     </>

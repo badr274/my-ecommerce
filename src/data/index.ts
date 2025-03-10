@@ -2,9 +2,26 @@ import { IAddressInput, ICreditCardInput, IInput } from "@/interfaces";
 
 export const LOGIN_FORM_INPUTS: IInput[] = [
   {
+    type: "email",
+    name: "email",
+    placeholder: "Enter your email",
+  },
+  {
+    type: "password",
+    name: "password",
+    placeholder: "Enter your password",
+  },
+];
+export const SIGNUP_FORM_INPUTS: IInput[] = [
+  {
     type: "text",
     name: "username",
-    placeholder: "Enter your username",
+    placeholder: "Enter your name",
+  },
+  {
+    type: "email",
+    name: "email",
+    placeholder: "Enter your email",
   },
   {
     type: "password",

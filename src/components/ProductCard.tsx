@@ -10,6 +10,7 @@ import {
 import { IProduct } from "@/interfaces";
 import { useAppDispatch } from "@/app/hooks";
 import { addToCart } from "@/app/features/ShoppingCartSlice";
+import { toast } from "sonner";
 
 interface IProductCard {
   product: IProduct;
@@ -20,6 +21,7 @@ const ProductCard = ({ product, productsPage }: IProductCard) => {
   const { id, title, description, thumbnail, category } = product;
   const handleAddToCart = () => {
     dispatch(addToCart(product));
+    toast.success("Product added successfully!");
   };
   return (
     <Card>

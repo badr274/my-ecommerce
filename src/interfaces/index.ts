@@ -20,7 +20,7 @@ export interface IProduct {
 
 export interface IInput {
   type: string;
-  name: "username" | "password";
+  name: "username" | "password" | "email";
   placeholder?: string;
 }
 export interface IAddressInput {
@@ -29,7 +29,12 @@ export interface IAddressInput {
   placeholder?: string;
 }
 export interface ILogin {
+  email: string;
+  password: string;
+}
+export interface ISignup {
   username: string;
+  email: string;
   password: string;
 }
 export interface ICreditCardInput {

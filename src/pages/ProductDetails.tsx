@@ -13,6 +13,7 @@ import { IProduct } from "@/interfaces";
 import { calcPriceDiscount } from "@/utils";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -44,6 +45,11 @@ const ProductDetails = () => {
       </div>
     );
   }
+  const handleAddToCart = () => {
+    if (!product) return;
+    dispatch(addToCart(product));
+    toast.success("Product added successfully!");
+  };
   // Renders
   const renderSimilarProducts = similarProducts?.products.map(
     (product: IProduct) => {
@@ -108,7 +114,7 @@ const ProductDetails = () => {
               <Button
                 variant={"destructive"}
                 className="flex-1"
-                onClick={() => product && dispatch(addToCart(product))}
+                onClick={handleAddToCart}
               >
                 Add to cart
               </Button>

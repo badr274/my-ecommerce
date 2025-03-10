@@ -1,24 +1,21 @@
 import { Button } from "@/components/ui/button";
-
 import { Input } from "@/components/ui/input";
-import { ADDRESS_INPUTS, CREDIT_CART_INPUTS } from "@/data";
+import { ADDRESS_INPUTS } from "@/data";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addressSchema } from "@/validation";
-import { CreditCardWrapper } from "@/components/CreditCard";
-import { ChangeEvent, useState } from "react";
 import { useAppSelector } from "@/app/hooks";
 import { calcTotalPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import CookieService from "@/services/CookieService";
+
 type Inputs = {
   country: string;
   city: string;
   street: string;
   postalCode: string;
   creditNumber: string;
-  holderName: string;
   expiry: string;
   cvc: string;
 };
@@ -38,27 +35,8 @@ const CheckoutPage = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(addressSchema),
   });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => console.log(data);
 
-  const defaultCreditCard = {
-    creditNumber: "",
-    holderName: "",
-    expiry: "",
-    cvc: "",
-    focus: "",
-  };
-  const [creditCardValues, setCreditCardValues] = useState(defaultCreditCard);
-  // HANDLERS
-  const handleCreditCardInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCreditCardValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    setCreditCardValues((prev) => ({ ...prev, focus: e.target.name }));
-  };
   // RENDERs
   const renderAddressInputs = ADDRESS_INPUTS.map(
     ({ name, type, placeholder }, idx) => {
@@ -72,32 +50,7 @@ const CheckoutPage = () => {
       );
     }
   );
-  const renderCreditCard = CREDIT_CART_INPUTS.map(
-    ({ type, name, placeholder, maxLength }, idx) => {
-      return (
-        <div key={idx}>
-          <Input
-            type={type}
-            {...register(name)}
-            name={name}
-            placeholder={placeholder}
-            maxLength={maxLength}
-            onChange={handleCreditCardInputsChange}
-            onFocus={handleInputFocus}
-            onInput={(e) => {
-              const target = e.target as HTMLInputElement;
-              if (maxLength && target.value.length > maxLength) {
-                target.value = target.value.slice(0, maxLength);
-              }
-            }}
-          />
-          {errors[name] && (
-            <p className="text-red-500 text-sm">{errors[name]?.message}</p>
-          )}
-        </div>
-      );
-    }
-  );
+
   const renderOrderItems = cartItems?.map((item) => {
     return (
       <div key={item.id} className="flex items-center justify-between">
@@ -105,7 +58,7 @@ const CheckoutPage = () => {
           <span className="text-gray-500 text-sm">x{item.quantity}</span>
           <p>{item.title}</p>
         </div>
-        <span className="text-destructive font-medium">
+        <span className="font-medium">
           ${(item.price * item.quantity).toFixed(2)}
         </span>
       </div>
@@ -139,16 +92,6 @@ const CheckoutPage = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-7 ">
           {renderAddressInputs}
-          <CreditCardWrapper
-            creditNumber={creditCardValues.creditNumber}
-            holderName={creditCardValues.holderName}
-            expiry={creditCardValues.expiry}
-            cvc={creditCardValues.cvc}
-            focused={
-              creditCardValues.focus as "number" | "name" | "expiry" | "cvc"
-            }
-          />
-          <div className="space-y-7 mt-7">{renderCreditCard}</div>
           <Button type="submit" className="cursor-pointer">
             Confirm Payment
           </Button>
