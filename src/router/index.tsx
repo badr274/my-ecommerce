@@ -13,7 +13,7 @@ import AboutPage from "@/pages/AboutPage";
 import CartPage from "@/pages/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import PricingPage from "@/pages/PricingPage";
-import SignupPage from "@/pages/Auth/SignUpPage";
+import SignupPage from "@/pages/Auth/SignupPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
